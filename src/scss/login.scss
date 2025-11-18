@@ -1,0 +1,153 @@
+@use "sass:color";
+
+$lightGreen: #64d370;
+$lightGrey: #f5faff;
+$darkGrey: #1e1e1e;
+
+.app {
+	position: relative;
+	min-height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 20px;
+
+	.dark__background {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background: $darkGrey;
+		z-index: 1;
+	}
+
+	.app__container {
+		width: 100%;
+		max-width: 1100px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		// LOGIN & REGISTER
+		.auth {
+			position: relative;
+			z-index: 3;
+			margin: 0 auto;
+			width: 100%;
+			max-width: 500px;
+			height: auto;
+			min-height: auto;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			background-color: #f5faff;
+			border: 3px solid $lightGreen;
+			padding: 40px 30px;
+			border-radius: 20px;
+
+			// Гарантируем что контент не выходит за границы
+			box-sizing: border-box;
+		}
+
+		h1 {
+			font-size: 24px;
+			color: $darkGrey;
+			font-weight: 700;
+			font-family: 'Comfortaa';
+			margin-bottom: 30px;
+			text-align: center;
+			width: 100%;
+		}
+
+		form {
+			width: 100%;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			padding: 0;
+			max-width: 300px;
+			margin: 0;
+
+			// Стили для всех input элементов
+			input {
+				width: 100%;
+				padding: 12px 20px;
+				border: none;
+				border-radius: 30px;
+				margin-bottom: 15px;
+				box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+				font-family: 'Comfortaa';
+				background: #f5faff;
+				box-sizing: border-box;
+
+				&:focus {
+					outline: none;
+					box-shadow: 0 2px 15px rgba(100, 211, 112, 0.3);
+				}
+			}
+
+			.place__btn {
+				width: 100%;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				margin-top: 10px;
+
+				.login__btn {
+					position: relative;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					padding: 15px 20px;
+
+					font-size: 22px;
+					font-weight: 700;
+					font-family: 'Comfortaa';
+
+					background-color: #1e1e1e;
+					color: #f5faff;
+
+					border-radius: 30px 30px 30px 30px;
+					box-shadow: 0 0 40px 0 rgba(86, 86, 86, 0.3);
+					transition: all 0.3s ease;
+					transform: scale(1);
+
+					&:hover {
+						background: color.adjust($lightGreen, $lightness: -10%);
+						transform: translateY(-2px);
+					}
+				}
+			}
+
+			p {
+				color: #ff6b6b;
+				text-align: center;
+				margin: 10px 0;
+				font-family: 'Comfortaa';
+				font-size: 14px;
+				width: 100%;
+			}
+
+			span {
+				text-align: center;
+				color: $darkGrey;
+				font-family: 'Comfortaa';
+				margin-top: 15px;
+				font-size: 14px;
+				width: 100%;
+
+				a {
+					color: $lightGreen;
+					text-decoration: none;
+					font-weight: bold;
+
+					&:hover {
+						text-decoration: underline;
+					}
+				}
+			}
+		}
+	}
+}
