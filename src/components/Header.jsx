@@ -1,5 +1,6 @@
 import React from 'react'
 import { useModal } from '../hooks/useModal'
+import { useNavigate, Link } from 'react-router-dom'
 
 const Header = () => {
 	const {
@@ -12,19 +13,25 @@ const Header = () => {
 		handleSubmit,
 	} = useModal()
 
+	const navigate = useNavigate()
+
+	const handleProfileClick = () => {
+		navigate('/profile')
+	}
+
 	return (
 		<header className='header active'>
 			<div className='container'>
 				<div className='header__inner'>
 					<div className='header__logo'>
 						<div className='logo__circle'>
-							<a href='#'>
+							<Link>
 								<img
 									className='header__logo--img'
 									src='src/assets/logo/gastro_chef_logo.png'
 									alt='Healthy Ration Logo'
 								/>
-							</a>
+							</Link>
 							<div className='header__logo--text'>healthy ration</div>
 						</div>
 					</div>
@@ -44,9 +51,9 @@ const Header = () => {
 								<a href='#' className='nav__link'>
 									Про нас
 								</a>
-								<a href='#' className='nav__link'>
+								<Link to='/profile' className='nav__link'>
 									Профіль
-								</a>
+								</Link>
 							</div>
 							<div className='nav__lang--wrapper'>
 								<div className='change__lang'>
