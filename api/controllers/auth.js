@@ -48,6 +48,37 @@ export const register = (req, res) => {
 			})
 		})
 	})
+
+	const selectQ =
+		'SELECT id, username, email, created_at FROM users WHERE id = ?'
+
+	db.query(selectQ, [data.insertId], (err, userData) => {
+		if (err) {
+			console.error('❌ Select user error:', err)
+			return res.status(500).json('Database error: ' + err.message)
+		}
+		if (userData.length === 0) {
+			console.log('❌ Created user not found')
+			return res.status(500).json('User creation failed')
+		}
+
+		const newUser = userData[0]
+		console.log('✅ User data retrieved:', newUser)
+
+		const token = jwt.sign({ id: newUser.id }, 'jwtkey')
+
+		res
+			.cookie('access_token', token, {
+				httpOnly: true,
+				secure: process.env.NODE_ENV === 'production',
+				sameSite: 'lax',
+			})
+			.status(200)
+			.json({
+				message: 'User has been created successfully',
+				user: newUser,
+			})
+	})
 }
 
 export const login = (req, res) => {
@@ -81,7 +112,7 @@ export const login = (req, res) => {
 		}
 
 		const user = data[0]
-		console.log('🔍 User found:', user.username)
+		console.log('🔍 User found:', user.username, 'ID:', user.id)
 
 		const isPasswordCorrect = bcrypt.compareSync(password, user.password)
 
@@ -114,4 +145,31 @@ export const logout = (req, res) => {
 	console.log('📨 Logout request received')
 	res.clearCookie('access_token')
 	res.status(200).json({ message: 'Logout successful' })
+}
+
+export const verify = (req, res) => {
+	const token = req.cookies.access_token
+
+	if (!token) {
+		return res.status(401).json({ message: 'Not authenticated' })
+	}
+
+	jwt.verify(token, 'jwtkey', (err, decoded) => {
+		if (err) {
+			return res.status(403).json({ message: 'Token is not valid' })
+		}
+
+		const q = 'SELECT id, username, email, created_at FROM users WHERE id = ?'
+		db.query(q, [decoded.id], (err, data) => {
+			if (err) {
+				return res.status(500).json({ message: 'Database error' })
+			}
+
+			if (data.length === 0) {
+				return res.status(404).json({ message: 'User not found' })
+			}
+
+			res.status(200).json({ user: data[0] })
+		})
+	})
 }
