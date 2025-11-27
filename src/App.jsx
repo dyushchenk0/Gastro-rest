@@ -3,6 +3,7 @@ import './App.css'
 import Header from './components/Header.jsx'
 import Footer from './components/Footer.jsx'
 import ProgramNutrition from './components/Nutrition.jsx'
+import { LanguageProvider } from './contexts/LanguageContext.jsx'
 import { ModalProvider } from './components/ModalContext'
 import ProtectedRoute from './components/ProtectedRoute'
 import { UserProvider } from './contexts/UserContext'
@@ -62,11 +63,13 @@ function App() {
 	return (
 		<UserProvider>
 			<ModalProvider>
-				<div className='app'>
-					<div className='container'>
-						<RouterProvider router={router} />
+				<LanguageProvider>
+					<div className='app'>
+						<div className='container'>
+							<RouterProvider router={router} />
+						</div>
 					</div>
-				</div>
+				</LanguageProvider>
 			</ModalProvider>
 		</UserProvider>
 	)

@@ -1,9 +1,12 @@
 import React from 'react'
 import { useModalPlaceOrder } from '../hooks/useModalPlaceOrder'
+import { useLanguage } from '../contexts/LanguageContext.jsx'
 import OrderModal from './OrderModal'
+
 
 const Intro = () => {
 	const { openOrderModal } = useModalPlaceOrder()
+	const { translations } = useLanguage()
 
 	const handleOrderClick = e => {
 		e.preventDefault()
@@ -38,18 +41,22 @@ const Intro = () => {
 						<div className='intro__text--block'>
 							<div className='intro__title'>
 								Detox програма – <br />
-								смачне очищення організму
+								<span>смачне очищення</span> організму
 							</div>
 							<div className='intro__subtitle'>
 								8 пляшок <span>натуральних</span> смузі та фрешів.
 							</div>
 							<div className='intro__order'>
 								<a className='btn' onClick={handleOrderClick}>
-									Замовити
+									{translations['intro.orderButton'] || 'Замовити'}
 								</a>
 								<div className='order__content'>
-									<div className='order__text'>Пробний день всього:</div>
-									<div className='order__price'>427 грн</div>
+									<div className='order__text'>
+										{translations['intro.trialPrice'] || 'Пробний день всього:'}
+									</div>
+									<div className='order__price'>
+										{translations['intro.trialPrice2'] || '427 UAH'}
+									</div>
 								</div>
 							</div>
 						</div>

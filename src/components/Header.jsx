@@ -1,7 +1,9 @@
 import React from 'react'
 import { useModal } from '../hooks/useModal'
 import { useUser } from '../contexts/UserContext.jsx'
-import { useNavigate, Link, NavLink } from 'react-router-dom' // Добавьте NavLink
+import { useLanguage } from '../contexts/LanguageContext.jsx'
+import { useNavigate, Link, NavLink } from 'react-router-dom'
+import LangButtons from '../components/LangButtons.jsx'
 
 const Header = () => {
 	const {
@@ -16,6 +18,7 @@ const Header = () => {
 
 	const navigate = useNavigate()
 	const { currentUser } = useUser()
+	const { translations } = useLanguage()
 
 	const handleProfileClick = () => {
 		const user = getUser()
@@ -38,6 +41,7 @@ const Header = () => {
 									className='header__logo--img'
 									src='src/assets/logo/gastro_chef_logo.png'
 									alt='Healthy Ration Logo'
+									data--lang='home__page'
 								/>
 							</Link>
 							<div className='header__logo--text'>healthy ration</div>
@@ -48,26 +52,35 @@ const Header = () => {
 						<nav className='nav'>
 							<div className='nav__wrapper'>
 								<NavLink
+									to='/#'
+									className={({ isActive }) =>
+										`nav__link ${isActive ? 'nav__link--active' : ''}`
+									}
+									data--lang='nutrition__page'
+								>
+									{translations['nav.programsNutrition'] ||
+										'Програми харчування'}
+								</NavLink>
+								<NavLink
 									to='/nutrition'
 									className={({ isActive }) =>
 										`nav__link ${isActive ? 'nav__link--active' : ''}`
 									}
+									data--lang='nutrition__page'
 								>
-									Програми харчування
+									{translations['nav.businessLunch'] || 'Бізнес-ланчі'}
 								</NavLink>
-								<a href='#' className='nav__link'>
-									Бізнес-ланчі
-								</a>
 								<NavLink
 									to='/'
 									className={({ isActive }) =>
 										`nav__link ${isActive ? 'nav__link--active' : ''}`
 									}
+									data--lang='home__page'
 								>
-									Gastro Shop
+									{translations['nav.brandName'] || 'Gastro Shop'}
 								</NavLink>
 								<a href='#' className='nav__link'>
-									Про нас
+									{translations['nav.about'] || 'Про нас'}
 								</a>
 								{currentUser ? (
 									<NavLink
@@ -75,8 +88,9 @@ const Header = () => {
 										className={({ isActive }) =>
 											`nav__link ${isActive ? 'nav__link--active' : ''}`
 										}
+										data--lang='profile__page'
 									>
-										Профіль ({currentUser.username})
+										{translations['nav.profile'] || 'Профіль'}
 									</NavLink>
 								) : (
 									<NavLink
@@ -84,17 +98,14 @@ const Header = () => {
 										className={({ isActive }) =>
 											`nav__link ${isActive ? 'nav__link--active' : ''}`
 										}
+										data--lang='profile__page'
 									>
-										Профіль
+										{translations['nav.profile'] || 'Профіль'}
 									</NavLink>
 								)}
 							</div>
-							<div className='nav__lang--wrapper'>
-								<div className='change__lang'>
-									<a className='change__lang--item active'>UA</a>
-									<a className='change__lang--item'>EN</a>
-								</div>
-							</div>
+
+							<LangButtons />
 
 							<button className='nav-toggle active' type='button'>
 								<span className='nav-toggle__item'>Menu</span>

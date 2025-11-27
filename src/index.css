@@ -653,7 +653,7 @@ body {
 
 .rules__item {
 	flex: 1 1 0;
-	padding: 35px 15px;
+	padding: 30px 15px;
 
 	text-align: center;
 	justify-content: center;
@@ -661,11 +661,11 @@ body {
 }
 
 .rules__item:first-child {
-	margin-left: 30px;
+	padding-left: 20px;
 }
 
 .rules__item:last-child {
-	margin-right: 30px;
+	padding-right: 20px;
 }
 
 .rules__item:nth-child(4) {
