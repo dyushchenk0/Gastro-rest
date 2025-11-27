@@ -1,17 +1,18 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { useUser } from '../contexts/UserContext'
 import axios from 'axios'
 
 const Login = () => {
+	const { setCurrentUser } = useUser()
+	const navigate = useNavigate()
+
 	const [inputs, setInputs] = useState({
 		username: '',
 		password: '',
 	})
-
 	const [err, setError] = useState(null)
 	const [loading, setLoading] = useState(false)
-
-	const navigate = useNavigate()
 
 	const handleChange = e => {
 		setInputs(prev => ({ ...prev, [e.target.name]: e.target.value }))
@@ -32,7 +33,7 @@ const Login = () => {
 		try {
 			console.log('🔄 Sending login request...', inputs)
 
-			const response = await axios.post(
+			const res = await axios.post(
 				'http://localhost:8800/api/auth/login',
 				inputs,
 				{
@@ -43,8 +44,11 @@ const Login = () => {
 				}
 			)
 
-			console.log('✅ Login successful:', response.data)
-			navigate('/')
+			console.log('✅ Login successful:', res.data)
+
+			setCurrentUser(res.data.user)
+
+			navigate(`/profile/${res.data.user.id}`)
 		} catch (err) {
 			console.error('❌ Login error:', err.response?.data || err.message)
 			setError(err.response?.data || 'Login failed')

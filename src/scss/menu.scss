@@ -1,0 +1,20 @@
+.menu {
+  position: fixed;
+  top: 15%;
+  left: 0;
+  width: 200px;
+  padding: 20px;
+
+  .menu__block {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    padding: 10px 20px;
+  }
+
+  .menu__item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+}

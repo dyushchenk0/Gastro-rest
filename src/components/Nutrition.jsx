@@ -108,9 +108,9 @@ const Nutrition = () => {
 									<p className='current__price'>{price.current}</p>
 								</div>
 							))}
-							<button onClick={openOrderModal} className='btn margin'>
+							<a onClick={openOrderModal} className='btn margin'>
 								Замовити
-							</button>
+							</a>
 						</div>
 					</div>
 

@@ -7,7 +7,6 @@ export const useModal = () => {
 		phone: '',
 	})
 
-	// Функции для управления скроллом
 	const disableScroll = useCallback(() => {
 		document.body.style.overflow = 'hidden'
 		document.documentElement.style.overflow = 'hidden'
@@ -18,7 +17,6 @@ export const useModal = () => {
 		document.documentElement.style.overflow = ''
 	}, [])
 
-	// Сброс формы
 	const resetModalForm = useCallback(() => {
 		setFormData({
 			name: '',
@@ -27,7 +25,6 @@ export const useModal = () => {
 		console.log('Modal form reset')
 	}, [])
 
-	// Открытие модального окна
 	const openModal = useCallback(
 		e => {
 			if (e) {
@@ -40,7 +37,6 @@ export const useModal = () => {
 		[disableScroll]
 	)
 
-	// Закрытие модального окна
 	const closeModal = useCallback(() => {
 		setIsModalOpen(false)
 		enableScroll()
@@ -48,7 +44,6 @@ export const useModal = () => {
 		console.log('🔴 Modal closed')
 	}, [enableScroll, resetModalForm])
 
-	// Обработка изменений в форме
 	const handleInputChange = useCallback(e => {
 		const { name, value } = e.target
 		setFormData(prev => ({
@@ -57,22 +52,56 @@ export const useModal = () => {
 		}))
 	}, [])
 
-	// Обработка отправки формы
-	const handleSubmit = useCallback(
-		e => {
-			e.preventDefault()
-			console.log('📝 Modal form submitted', formData)
+	// // Обработка отправки формы
+	// const handleSubmit = useCallback(
+	// 	e => {
+	// 		e.preventDefault()
+	// 		console.log('📝 Modal form submitted', formData)
 
-			// Здесь можно добавить отправку формы на сервер
-			// Например: axios.post('/api/contact', formData)
+	// 		// Здесь можно добавить отправку формы на сервер
+	// 		// Например: axios.post('/api/contact', formData)
 
-			// Закрываем модальное окно после отправки
-			setTimeout(() => {
+	// 		// Закрываем модальное окно после отправки
+	// 		setTimeout(() => {
+	// 			closeModal()
+	// 		}, 500)
+	// 	},
+	// 	[formData, closeModal]
+	// )
+
+	const handleSubmit = async e => {
+		e.preventDefault()
+
+		const url = isLogin
+			? 'http://localhost:8800/api/auth/login'
+			: 'http://localhost:8800/api/auth/register'
+
+		try {
+			const response = await fetch(url, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(formData),
+				credentials: 'include',
+			})
+
+			const data = await response.json()
+
+			if (response.ok) {
+				setCurrentUser(data.user)
 				closeModal()
-			}, 500)
-		},
-		[formData, closeModal]
-	)
+
+				console.log('🔄 Redirecting to profile:', data.user.id)
+				navigate(`/profile/${data.user.id}`)
+			} else {
+				alert(data.message || 'Something went wrong')
+			}
+		} catch (error) {
+			console.error('Auth error:', error)
+			alert('Network error')
+		}
+	}
 
 	// Закрытие по ESC
 	useEffect(() => {

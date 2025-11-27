@@ -1,7 +1,17 @@
 import React from 'react'
-// import { useModal } from '../hooks/useModal'
+import { useEffect } from 'react'
+import { useModal } from '../hooks/useModal'
+import '../scss/footer.scss'
 
 const Footer = () => {
+	useEffect(() => {
+		document.body.classList.add('footer__block')
+
+		return () => {
+			document.body.classList.remove('footer__block')
+		}
+	}, [])
+
 	const openModal = () => {
 		console.log('Open modal')
 	}
@@ -59,7 +69,7 @@ const Footer = () => {
 					</div>
 
 					<div className='right__block--item phone'>
-						{/* Закомментировали вызов openModal */}
+						{/* Закомментировал вызов openModal */}
 						<button onClick={openModal} className='phone-btn'>
 							+38 (068) 949 - 49 - 19
 						</button>

@@ -1,0 +1,281 @@
+body.nutrition-page .header {
+	margin-top: -70px;
+	position: relative;
+	z-index: 1000;
+}
+
+body.nutrition-page .app,
+body.nutrition-page .nutrition {
+	position: relative;
+	z-index: 1;
+	margin-top: 0;
+	padding-top: 0;
+}
+
+.app {
+	position: relative;
+	min-height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+// Content
+.content {
+	position: relative;
+	display: flex;
+	justify-content: space-between;
+	flex-direction: column;
+	width: 100%;
+
+	.business__lunch {
+		position: relative;
+		width: 100vw;
+		color: #fff;
+		background-color: #4b4b4b;
+		margin-top: -35px;
+		margin-bottom: 20px;
+		left: 50%;
+		transform: translateX(-50%);
+		z-index: -10;
+
+		.business__banner {
+			position: relative;
+			width: 100%;
+			max-width: 1200px;
+			text-align: center;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			margin: 0 auto;
+
+			.banner__images {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				width: 100%;
+				gap: 100px;
+				max-width: 1000px;
+				position: relative;
+			}
+
+			.business__img {
+				pointer-events: none;
+				z-index: 1;
+				margin-left: 0;
+				filter: brightness(0.3);
+			}
+
+			.business__img:first-child {
+				margin-right: 100px;
+			}
+
+			.banner__text {
+				position: absolute;
+				width: 100%;
+				text-align: center;
+				z-index: 100;
+				pointer-events: auto;
+				color: white;
+
+				.business__title {
+					font-size: 28px;
+					font-weight: 700;
+					font-family: 'Comfortaa';
+					margin-bottom: 20px;
+					text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+				}
+
+				.business__desc {
+					font-size: 16px;
+					font-weight: 400;
+					font-family: 'Montserrat';
+					line-height: 1.6;
+					text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+					padding: 20px;
+					border-radius: 10px;
+				}
+			}
+		}
+	}
+}
+
+.notification__btn {
+	background: #64d370;
+	padding-top: 8px;
+	padding-left: 1px;
+	width: 40px;
+	height: 40px;
+	border-radius: 190px;
+}
+
+.notification__icon {
+	filter: brightness(0) invert(1);
+}
+
+.block__title {
+	text-align: left;
+	justify-content: flex-start;
+	font-size: 24px;
+	font-weight: 700;
+	font-family: 'Comfortaa';
+	margin: 40px 0;
+	width: 100%;
+}
+
+// Lunch Card
+
+.lunch__block {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	margin-top: 10px;
+
+	.order__btn--wrapper {
+		width: 100%;
+		display: flex;
+		justify-content: flex-end;
+	}
+
+	.place__order {
+		position: relative;
+		width: 100%;
+		max-width: 340px;
+		color: #f5faff;
+		text-align: center;
+		font-family: 'Montserrat';
+		font-size: 22px;
+		font-weight: 500;
+		line-height: 133.8%;
+		letter-spacing: 0.5px;
+		border-radius: 190px;
+		text-decoration: none;
+		background: #64d370;
+		padding: 10px 20px;
+		display: inline-block;
+		transition: all 0.3s ease;
+		z-index: 2;
+	}
+
+	.place__order:hover {
+		transform: scale(1.05);
+	}
+
+	.business__lunch--block {
+		display: flex;
+		justify-content: space-between;
+		flex-direction: row;
+		gap: 50px;
+		width: 100%;
+		margin-bottom: 40px;
+
+		.lunch__item {
+			width: 50%;
+		}
+
+		.lunch__title--block {
+			display: flex;
+			width: 100%;
+			flex-direction: row;
+			justify-content: space-between;
+			align-items: center;
+			margin-bottom: 20px;
+		}
+
+		.lunch__title {
+			text-align: center;
+			font-family: 'Comfortaa';
+			font-size: 18px;
+			font-weight: 700;
+			line-height: 133.8%;
+			letter-spacing: 0.5px;
+			margin-left: 50px;
+		}
+
+		.lunch__weight {
+			color: #64d370;
+			text-align: center;
+			font-family: 'Comfortaa';
+			font-size: 18px;
+			font-weight: 700;
+			line-height: 133.8%;
+			letter-spacing: 0.5px;
+			margin-left: 75px;
+		}
+
+		.lunch__calories {
+			color: #64d370;
+			text-align: center;
+			font-family: 'Comfortaa';
+			font-size: 18px;
+			font-weight: 700;
+			line-height: 133.8%;
+			letter-spacing: 0.5px;
+		}
+
+		.lunch__text {
+			text-align: center;
+			font-family: 'Comfortaa';
+			font-size: 14px;
+			font-weight: 600;
+			line-height: 133.8%;
+			letter-spacing: 0.5px;
+		}
+
+		.lunch__text--block {
+			display: flex;
+			width: 100%;
+			flex-direction: column;
+			align-items: flex-start;
+			margin-bottom: 20px;
+			margin-left: 50px;
+		}
+
+		.lunch__count {
+			position: relative;
+			display: flex;
+			align-items: center;
+			gap: 10px;
+			z-index: 2;
+			left: 50px;
+
+			.minus,
+			.plus {
+				width: 42px;
+				height: 42px;
+				border-radius: 50%;
+				background: #dee6ee;
+				border: none;
+				font-size: 22px;
+				font-weight: 500;
+				color: #2c2c2c;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				cursor: pointer;
+				transition: 0.2s ease;
+
+				&:hover {
+					background: #d2d9e0;
+				}
+			}
+
+			.lunch__amount {
+				font-size: 20px;
+				font-weight: 700;
+				color: #64d370;
+				min-width: 18px;
+				text-align: center;
+			}
+
+			.lunch__price {
+				font-size: 20px;
+				color: #64d370;
+				font-family: 'Montserrat';
+				font-weight: 700;
+				margin-left: 10px;
+				white-space: nowrap;
+			}
+		}
+	}
+}

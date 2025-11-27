@@ -1,5 +1,7 @@
 import React from 'react'
 import { useModal } from '../hooks/useModal'
+import { useUser } from '../contexts/UserContext.jsx'
+import { useNavigate, Link, NavLink } from 'react-router-dom' // Добавьте NavLink
 
 const Header = () => {
 	const {
@@ -12,19 +14,32 @@ const Header = () => {
 		handleSubmit,
 	} = useModal()
 
+	const navigate = useNavigate()
+	const { currentUser } = useUser()
+
+	const handleProfileClick = () => {
+		const user = getUser()
+
+		if (!user) {
+			navigate('/register')
+		} else {
+			navigate(`/profile/${user.id}`)
+		}
+	}
+
 	return (
 		<header className='header active'>
 			<div className='container'>
 				<div className='header__inner'>
 					<div className='header__logo'>
 						<div className='logo__circle'>
-							<a href='#'>
+							<Link to='/'>
 								<img
 									className='header__logo--img'
 									src='src/assets/logo/gastro_chef_logo.png'
 									alt='Healthy Ration Logo'
 								/>
-							</a>
+							</Link>
 							<div className='header__logo--text'>healthy ration</div>
 						</div>
 					</div>
@@ -32,21 +47,47 @@ const Header = () => {
 					<div className='header__nav--block'>
 						<nav className='nav'>
 							<div className='nav__wrapper'>
-								<a href='#' className='nav__link'>
+								<NavLink
+									to='/nutrition'
+									className={({ isActive }) =>
+										`nav__link ${isActive ? 'nav__link--active' : ''}`
+									}
+								>
 									Програми харчування
-								</a>
+								</NavLink>
 								<a href='#' className='nav__link'>
 									Бізнес-ланчі
 								</a>
-								<a href='#' className='nav__link nav__link--green'>
+								<NavLink
+									to='/'
+									className={({ isActive }) =>
+										`nav__link ${isActive ? 'nav__link--active' : ''}`
+									}
+								>
 									Gastro Shop
-								</a>
+								</NavLink>
 								<a href='#' className='nav__link'>
 									Про нас
 								</a>
-								<a href='#' className='nav__link'>
-									Профіль
-								</a>
+								{currentUser ? (
+									<NavLink
+										to={`/profile/${currentUser.id}`}
+										className={({ isActive }) =>
+											`nav__link ${isActive ? 'nav__link--active' : ''}`
+										}
+									>
+										Профіль ({currentUser.username})
+									</NavLink>
+								) : (
+									<NavLink
+										to='/register'
+										className={({ isActive }) =>
+											`nav__link ${isActive ? 'nav__link--active' : ''}`
+										}
+									>
+										Профіль
+									</NavLink>
+								)}
 							</div>
 							<div className='nav__lang--wrapper'>
 								<div className='change__lang'>
@@ -101,12 +142,9 @@ const Header = () => {
 									/>
 								</div>
 								<div className='contact__us'>
-									<button
-										type='submit'
-										className='modal__btn btn__green btn__min'
-									>
+									<a className='modal__btn btn__green btn__min'>
 										Передзвонити мені
-									</button>
+									</a>
 								</div>
 							</form>
 						</div>
