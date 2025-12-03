@@ -16,24 +16,29 @@ import Nutrition from './pages/Nutrition.jsx'
 import Order from './pages/Order.jsx'
 import './scss/login.scss'
 
-const Layout = () => {
-	return (
-		<ModalProvider>
-			<Header />
-			<div className='page'>
-				<Outlet />
-			</div>
-			<Footer />
-		</ModalProvider>
-	)
-}
-
-const HomeLayout = () => {
+const PublicLayout = () => {
 	return (
 		<div className='page'>
 			<Header />
-			<Home />
+			<Outlet />
 			<Footer />
+		</div>
+	)
+}
+
+const AuthLayout = () => {
+	return (
+		<div className='page'>
+			<Outlet />
+		</div>
+	)
+}
+
+const ProfileLayout = () => {
+	return (
+		<div className='page'>
+			<Header />
+			<Outlet />
 		</div>
 	)
 }
@@ -41,16 +46,27 @@ const HomeLayout = () => {
 const router = createBrowserRouter([
 	{
 		path: '/',
-		element: <HomeLayout />,
+		element: <PublicLayout />,
+		children: [
+			{ index: true, element: <Home /> },
+			{ path: 'nutrition', element: <Nutrition /> },
+			{ path: 'order', element: <Order /> },
+		],
 	},
+
 	{
 		path: '/',
-		element: <Layout />,
+		element: <AuthLayout />,
 		children: [
 			{ path: 'register', element: <Register /> },
 			{ path: 'login', element: <Login /> },
-			{ path: 'nutrition', element: <Nutrition /> },
-			{ path: 'order', element: <Order /> },
+		],
+	},
+
+	{
+		path: '/',
+		element: <ProfileLayout />,
+		children: [
 			{
 				element: <ProtectedRoute />,
 				children: [{ path: 'profile/:id', element: <Profile /> }],

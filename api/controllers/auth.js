@@ -35,49 +35,47 @@ export const register = (req, res) => {
 			'INSERT INTO users(`username`, `email`, `password`) VALUES (?, ?, ?)'
 		const values = [username, email, hash]
 
-		db.query(q, values, (err, data) => {
+		db.query(q, values, (err, insertData) => {
 			if (err) {
 				console.error('❌ Insert error:', err)
 				return res.status(500).json('Database error: ' + err.message)
 			}
 
-			console.log('✅ User created successfully:', username)
-			return res.status(200).json({
-				message: 'User has been created successfully',
-				user: { username, email },
+			console.log('✅ User created with ID:', insertData.insertId)
+
+			// Используем insertData вместо data
+			const selectQ =
+				'SELECT id, username, email, created_at FROM users WHERE id = ?'
+
+			db.query(selectQ, [insertData.insertId], (err, userData) => {
+				if (err) {
+					console.error('❌ Select user error:', err)
+					return res.status(500).json('Database error: ' + err.message)
+				}
+
+				if (userData.length === 0) {
+					console.log('❌ Created user not found')
+					return res.status(500).json('User creation failed')
+				}
+
+				const newUser = userData[0]
+				console.log('✅ User data retrieved:', newUser)
+
+				const token = jwt.sign({ id: newUser.id }, 'jwtkey')
+
+				res
+					.cookie('access_token', token, {
+						httpOnly: true,
+						secure: process.env.NODE_ENV === 'production',
+						sameSite: 'strict',
+					})
+					.status(200)
+					.json({
+						message: 'User has been created successfully',
+						user: newUser,
+					})
 			})
 		})
-	})
-
-	const selectQ =
-		'SELECT id, username, email, created_at FROM users WHERE id = ?'
-
-	db.query(selectQ, [data.insertId], (err, userData) => {
-		if (err) {
-			console.error('❌ Select user error:', err)
-			return res.status(500).json('Database error: ' + err.message)
-		}
-		if (userData.length === 0) {
-			console.log('❌ Created user not found')
-			return res.status(500).json('User creation failed')
-		}
-
-		const newUser = userData[0]
-		console.log('✅ User data retrieved:', newUser)
-
-		const token = jwt.sign({ id: newUser.id }, 'jwtkey')
-
-		res
-			.cookie('access_token', token, {
-				httpOnly: true,
-				secure: process.env.NODE_ENV === 'production',
-				sameSite: 'lax',
-			})
-			.status(200)
-			.json({
-				message: 'User has been created successfully',
-				user: newUser,
-			})
 	})
 }
 

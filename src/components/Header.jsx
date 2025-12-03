@@ -5,6 +5,8 @@ import { useLanguage } from '../contexts/LanguageContext.jsx'
 import { useNavigate, Link, NavLink } from 'react-router-dom'
 import LangButtons from '../components/LangButtons.jsx'
 
+import Logo from '../assets/logo/gastro_chef_logo.png'
+
 const Header = () => {
 	const {
 		isModalOpen,
@@ -39,7 +41,7 @@ const Header = () => {
 							<Link to='/'>
 								<img
 									className='header__logo--img'
-									src='src/assets/logo/gastro_chef_logo.png'
+									src={Logo}
 									alt='Healthy Ration Logo'
 									data--lang='home__page'
 								/>

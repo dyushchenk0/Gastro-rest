@@ -25,6 +25,15 @@ app.use('/api/dishes', dishRoutes)
 app.use('/api/users', userRoutes)
 app.use('/api/translations', translationRoutes)
 
+process.on('uncaughtException', error => {
+	console.error('🔥 Uncaught Exception (server continues):', error.message)
+	console.error('Stack:', error.stack)
+})
+
+process.on('unhandledRejection', (reason, promise) => {
+	console.error('🔥 Unhandled Rejection (server continues):', reason)
+})
+
 const PORT = process.env.PORT || 8800
 app.listen(PORT, () => {
 	console.log(`API server running on port ${PORT}`)

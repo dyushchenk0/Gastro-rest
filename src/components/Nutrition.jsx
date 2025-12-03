@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import { useModalPlaceOrder } from '../hooks/useModalPlaceOrder'
+import { useLanguage } from '../contexts/LanguageContext.jsx'
 
 const Nutrition = () => {
 	const { openOrderModal } = useModalPlaceOrder()
+	const { translations } = useLanguage()
 	const [activeDay, setActiveDay] = useState('пн')
 
 	const nutritionPrograms = [
@@ -15,7 +17,12 @@ const Nutrition = () => {
 		{ name: 'Maxi fit', calories: '2400', active: false },
 	]
 
-	const days = ['пн', 'вт', 'ср', 'чт', 'пт', 'сб', 'нд']
+	const getTranslatedDays = () => {
+		const daysKeys = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun']
+		return daysKeys.map(day => translations[`nutritions.days.${day}`] || day)
+	}
+
+	const days = getTranslatedDays()
 
 	const meals = [
 		{
@@ -59,9 +66,11 @@ const Nutrition = () => {
 			<div className='container'>
 				<div className='nutrition__category'>
 					<div className='nutrition__prog--title active'>
-						Програми харчування
+						{translations['nutritions.title1'] || 'Програми харчування'}
 					</div>
-					<div className='special__prog--title'>Спеціальні програми</div>
+					<div className='special__prog--title'>
+						{translations['nutritions.title2'] || 'Спеціальні програми'}
+					</div>
 				</div>
 
 				<div className='nutrition__variations'>

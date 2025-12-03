@@ -7,7 +7,7 @@ export const useUser = () => useContext(UserContext)
 
 export const UserProvider = ({ children }) => {
 	const [currentUser, setCurrentUser] = useState(null)
-
+	const [loading, setLoading] = useState(true)
 	useEffect(() => {
 		const checkAuth = async () => {
 			try {
@@ -18,14 +18,17 @@ export const UserProvider = ({ children }) => {
 					setCurrentUser(res.data.user)
 				}
 			} catch (err) {
+				console.log('Auth check failed:', err.message)
 				setCurrentUser(null)
+			} finally {
+				setLoading(false)
 			}
 		}
 		checkAuth()
 	}, [])
 
 	return (
-		<UserContext.Provider value={{ currentUser, setCurrentUser }}>
+		<UserContext.Provider value={{ currentUser, setCurrentUser, loading }}>
 			{children}
 		</UserContext.Provider>
 	)

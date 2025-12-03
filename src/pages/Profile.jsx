@@ -31,6 +31,7 @@ const Profile = () => {
 								className='search__input'
 							/>
 						</div>
+
 						<a className='notification__btn'>
 							<img
 								src={NotificationIcon}
@@ -38,9 +39,10 @@ const Profile = () => {
 								className='notification__icon'
 							/>
 						</a>
-						<div className="profile__img">
-              <img src="" alt="" />
-            </div>
+
+						<div className='profile__img'>
+							<img src='' alt='' />
+						</div>
 					</div>
 				</div>
 			</div>
