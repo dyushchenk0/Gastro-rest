@@ -2,97 +2,123 @@ import React, { useState } from 'react'
 import { useModalPlaceOrder } from '../hooks/useModalPlaceOrder'
 import { useLanguage } from '../contexts/LanguageContext.jsx'
 
+import '../scss/nutrition.scss'
+
 const Nutrition = () => {
 	const { openOrderModal } = useModalPlaceOrder()
 	const { translations } = useLanguage()
-	const [activeDay, setActiveDay] = useState('пн')
+	const [activeDay, setActiveDay] = useState('mon')
 
+	// Programs
 	const nutritionPrograms = [
-		{ name: 'Express Fit', calories: '800', active: false },
-		{ name: 'Slim', calories: '100', active: false },
-		{ name: 'Fitness', calories: '1300', active: true },
-		{ name: 'Balance', calories: '1600', active: false },
-		{ name: 'Balance+', calories: '1800', active: false },
-		{ name: 'Strong', calories: '800', active: false },
-		{ name: 'Maxi fit', calories: '2400', active: false },
+		{ name: 'Express Fit', calories: 800, active: false },
+		{ name: 'Slim', calories: 1000, active: false },
+		{ name: 'Fitness', calories: 1300, active: true },
+		{ name: 'Balance', calories: 1600, active: false },
+		{ name: 'Balance+', calories: 1800, active: false },
+		{ name: 'Strong', calories: 800, active: false },
+		{ name: 'Maxi fit', calories: 2400, active: false },
 	]
 
-	const getTranslatedDays = () => {
-		const daysKeys = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun']
-		return daysKeys.map(day => translations[`nutritions.days.${day}`] || day)
-	}
+	// Days
+	const daysList = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun']
 
-	const days = getTranslatedDays()
-
+	// Menu
 	const meals = [
 		{
-			time: 'Сніданок<br />7:00-9:00',
-			name: '- Фріттата з сиром і кабачками',
-			price: '170 грн',
+			time: `${translations['nutritions.breackfast']}<br />7:00-9:00`,
+			name: translations['nutritions.breackfastDish'],
+			price: '170 ' + translations['basic.currency'],
 		},
 		{
-			time: '2-й сніданок<br />10:00-12:00',
-			name: '- Фермерский йогурт<br />- Корисне печиво з сухофруктів і горіхів',
-			price: '200 грн<br />2 шт',
+			time: `${translations['nutritions.lunch']}<br />10:00-12:00`,
+			name: translations['nutritions.lunchDish'],
+			price: '200 ' + translations['basic.currency'],
 		},
 		{
-			time: 'Обід<br />13:00-15:00',
-			name: '- Люля-кебаб з індички<br />- Літній салат з маслинами і сиром',
-			price: '100 грн<br />100 грн',
+			time: `${translations['nutritions.afternoon']}<br />13:00-15:00`,
+			name: translations['nutritions.afternoonDish'],
+			price: '200 ' + translations['basic.currency'],
 		},
 		{
-			time: 'Полудень<br />16:00-17:30',
-			name: '- Сирне суфле з какао і вишнею',
-			price: '100 грн',
+			time: `${translations['nutritions.afternoonSnack']}<br />16:00-17:30`,
+			name: translations['nutritions.afternoonSnackDish'],
+			price: '100 ' + translations['basic.currency'],
 		},
 		{
-			time: 'Вечеря<br />19:00-20:00',
-			name: '- Рибний терен<br />- Овочі гриль',
-			price: '100 грн<br />150 грн',
+			time: `${translations['nutritions.supper']}<br />19:00-20:00`,
+			name: translations['nutritions.supperDish'],
+			price: '250 ' + translations['basic.currency'],
 		},
 	]
 
+	// Prices
 	const prices = [
-		{ days: 'Тестовий день', discount: '510 грн', current: '357 грн' },
-		{ days: '1 день', discount: '-----', current: '510 грн' },
-		{ days: 'від 7 днів', discount: '510 грн', current: '490 грн' },
-		{ days: 'від 14 днів', discount: '510 грн', current: '470 грн' },
-		{ days: 'від 30 днів', discount: '510 грн', current: '445 грн' },
-		{ days: 'Завтрак и ужин', discount: '-15%', current: '433 грн' },
+		{
+			days: translations['nutrition__price.test__day'] || 'Тестовий день',
+			discount: translations['nutrition__price.discount.none'] || '510',
+			current: translations['nutrition__price.current.test'] || '357',
+		},
+		{
+			days: translations['nutrition__price.day1'] || '1 день',
+			discount: translations['nutrition__price.discount.none'] || '-----',
+			current: translations['nutrition__price.current.1'] || '510',
+		},
+		{
+			days: translations['nutrition__price.day7'] || 'від 7 днів',
+			discount: translations['nutrition__price.discount.7'] || '510',
+			current: translations['nutrition__price.current.7'] || '490',
+		},
+		{
+			days: translations['nutrition__price.day14'] || 'від 14 днів',
+			discount: translations['nutrition__price.discount.14'] || '510',
+			current: translations['nutrition__price.current.14'] || '470',
+		},
+		{
+			days: translations['nutrition__price.day30'] || 'від 30 днів',
+			discount: translations['nutrition__price.discount.30'] || '510',
+			current: translations['nutrition__price.current.30'] || '445',
+		},
+		{
+			days: translations['nutrition__price.dinner__supper'] || 'Сніданок і вечеря',
+			discount: translations['nutrition__price.discount.dinner'] || '-15%',
+			current: translations['nutrition__price.current.dinner'] || '433',
+		},
 	]
 
 	return (
 		<div className='nutrition'>
 			<div className='container'>
+				{/* Titles */}
 				<div className='nutrition__category'>
 					<div className='nutrition__prog--title active'>
-						{translations['nutritions.title1'] || 'Програми харчування'}
+						{translations['nutritions.title1']}
 					</div>
+
 					<div className='special__prog--title'>
-						{translations['nutritions.title2'] || 'Спеціальні програми'}
+						{translations['nutritions.title2']}
 					</div>
 				</div>
 
+				{/* Programs */}
 				<div className='nutrition__variations'>
-					{nutritionPrograms.map((program, index) => (
-						<div key={index} className='category__item'>
+					{nutritionPrograms.map((p, i) => (
+						<div key={i} className='category__item'>
 							<div className='category__item--title'>
 								<a
-									href='#'
-									className={`category__item--link ${
-										program.active ? 'active' : ''
-									}`}
+									className={`category__item--link ${p.active ? 'active' : ''}`}
 								>
-									{program.name}
+									{p.name}
 								</a>
 							</div>
 							<div className='category__item--calories'>
-								{program.calories} <span>ккал</span>
+								{p.calories} <span>ккал</span>
 							</div>
 						</div>
 					))}
 				</div>
 
+				{/* Fitness */}
 				<div className='nutrition__content'>
 					<div className='left__side'>
 						<div className='nutrition__desc'>
@@ -102,45 +128,50 @@ const Nutrition = () => {
 									1300 <span>ккал</span>
 								</div>
 							</div>
+
 							<div className='nutrition__desc--content'>
-								Програма здорового харчування Express Fit. Ідеально підходить
-								для: схуднення в найкоротші терміни, підвищення енергії та сил,
-								зниження ваги при сидячому способі життя.
+								{translations['nutritions.fitness']}
 							</div>
 						</div>
 
+						{/* Prices */}
 						<div className='nutrition__price'>
-							{prices.map((price, index) => (
-								<div key={index} className='nutrition__item'>
+							{prices.map((price, i) => (
+								<div key={i} className='nutrition__item'>
 									<p className='days'>{price.days}</p>
 									<p className='discount'>{price.discount}</p>
-									<p className='current__price'>{price.current}</p>
+									<p className='current__price'>
+										{price.current} {translations['basic.currency']}
+									</p>
 								</div>
 							))}
+
 							<a onClick={openOrderModal} className='btn margin'>
-								Замовити
+								{translations['intro.orderButton']}
 							</a>
 						</div>
 					</div>
 
+					{/* Days */}
 					<div className='right__side'>
 						<div className='nutrition__days'>
-							{days.map((day, index) => (
+							{daysList.map((d, i) => (
 								<div
-									key={index}
+									key={i}
 									className={`nutrition__days--item ${
-										activeDay === day ? 'active' : ''
+										activeDay === d ? 'active' : ''
 									}`}
-									onClick={() => setActiveDay(day)}
+									onClick={() => setActiveDay(d)}
 								>
-									<a href='#'>{day}</a>
+									<a>{translations[`nutritions.${d}`]}</a>
 								</div>
 							))}
 						</div>
 
+						{/* Dishes */}
 						<div className='nutrition__meal--times'>
-							{meals.map((meal, index) => (
-								<div key={index} className='meal__times--item'>
+							{meals.map((meal, i) => (
+								<div key={i} className='meal__times--item'>
 									<div
 										className='meal__time'
 										dangerouslySetInnerHTML={{ __html: meal.time }}
@@ -149,15 +180,13 @@ const Nutrition = () => {
 										className='meal__name'
 										dangerouslySetInnerHTML={{ __html: meal.name }}
 									/>
-									<div
-										className='meal__price'
-										dangerouslySetInnerHTML={{ __html: meal.price }}
-									/>
+									<div className='meal__price'>{meal.price}</div>
 								</div>
 							))}
 						</div>
 					</div>
 				</div>
+
 				<div className='nutrition__circle'></div>
 			</div>
 		</div>

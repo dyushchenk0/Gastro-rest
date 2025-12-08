@@ -1,8 +1,10 @@
 import React from 'react'
 import { useModalPlaceOrder } from '../hooks/useModalPlaceOrder'
 import { useLanguage } from '../contexts/LanguageContext.jsx'
+import Menu from './Menu.jsx'
 import OrderModal from './OrderModal'
 
+import '../index.css'
 
 const Intro = () => {
 	const { openOrderModal } = useModalPlaceOrder()
@@ -16,36 +18,23 @@ const Intro = () => {
 	return (
 		<div className='intro'>
 			<div className='intro__inner'>
-				<div className='intro__menu'>
-					<a className='menu__item'>Ккал</a>
-					<a className='menu__item active'>
-						<img src='src/assets/icons/nav/fish.png' alt='Fish' />
-					</a>
-					<a className='menu__item'>
-						<img src='src/assets/icons/nav/carrot.png' alt='Carrot' />
-					</a>
-					<a className='menu__item'>
-						<img src='src/assets/icons/nav/bottle.png' alt='Bottle' />
-					</a>
-					<a className='menu__item'>
-						<img src='src/assets/icons/nav/meat.png' alt='Meat' />
-					</a>
-					<a className='menu__item'>
-						<span>5</span>
-						<img src='src/assets/icons/nav/table.png' alt='Table' />
-					</a>
-				</div>
+				<Menu />
 
 				<div className='intro__content--container'>
 					<div className='intro__content'>
 						<div className='intro__text--block'>
-							<div className='intro__title'>
-								Detox програма – <br />
-								<span>смачне очищення</span> організму
-							</div>
-							<div className='intro__subtitle'>
-								8 пляшок <span>натуральних</span> смузі та фрешів.
-							</div>
+							<div
+								className='intro__title'
+								dangerouslySetInnerHTML={{
+									__html: translations['intro.title'],
+								}}
+							/>
+							<div
+								className='intro__subtitle'
+								dangerouslySetInnerHTML={{
+									__html: translations['intro.subtitle'],
+								}}
+							/>
 							<div className='intro__order'>
 								<a className='btn' onClick={handleOrderClick}>
 									{translations['intro.orderButton'] || 'Замовити'}

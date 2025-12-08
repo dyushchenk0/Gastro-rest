@@ -1,11 +1,14 @@
 import React from 'react'
+import { useLanguage } from '../contexts/LanguageContext.jsx'
 import '../scss/menu.scss'
 
 const Menu = () => {
+	const { translations } = useLanguage()
+
 	return (
 		<div className='menu'>
 			<div className='menu__block'>
-				<div className='menu__item'>Ккал</div>
+				<div className='menu__item'>{translations['intro.kcal']}</div>
 				<div className='menu__item'>
 					<img src='src/assets/icons/nav/fish.png' alt='fish' />
 				</div>

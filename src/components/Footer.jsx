@@ -1,29 +1,29 @@
-import React from 'react'
-import { useEffect } from 'react'
-import { useModal } from '../hooks/useModal'
+import React, { useEffect } from 'react'
+import { useLanguage } from '../contexts/LanguageContext'
 import '../scss/footer.scss'
 
 const Footer = () => {
+	const { translations } = useLanguage()
+
 	useEffect(() => {
 		document.body.classList.add('footer__block')
-
 		return () => {
 			document.body.classList.remove('footer__block')
 		}
 	}, [])
 
-	const openModal = () => {
-		console.log('Open modal')
-	}
 	const leftLinks = [
-		'Програми харчування',
-		'Про нас',
-		'Бізнес-ланчі',
-		'Gastro Shop',
-		'Блог',
+		translations['footer.leftItem1'],
+		translations['footer.leftItem2'],
+		translations['footer.leftItem3'],
+		translations['footer.leftItem4'],
+		translations['footer.leftItem5'],
 	]
 
-	const rightLinks = ['Умови співпраці', 'FASQ']
+	const rightLinks = [
+		translations['footer.rightItem2'],
+		translations['footer.rightItem3'],
+	]
 
 	const socialIcons = [
 		{ icon: 'fa-brands fa-instagram', name: 'Instagram' },
@@ -35,6 +35,7 @@ const Footer = () => {
 	return (
 		<div className='footer'>
 			<div className='container'>
+				{/* LEFT BLOCK */}
 				<div className='left__block'>
 					{leftLinks.map((link, index) => (
 						<div key={index} className='left__block--item'>
@@ -43,6 +44,7 @@ const Footer = () => {
 					))}
 				</div>
 
+				{/* CENTER BLOCK */}
 				<div className='center__block'>
 					<div className='gastro__logo'>
 						<img
@@ -50,9 +52,13 @@ const Footer = () => {
 							alt='Gastro Chef'
 						/>
 					</div>
-					<div className='gastro__logo--title'>сервіс здорового харчування</div>
+
+					<div className='gastro__logo--title'>
+						{translations['footer.rightItem1']}
+					</div>
 				</div>
 
+				{/* RIGHT BLOCK */}
 				<div className='right__block'>
 					{rightLinks.map((link, index) => (
 						<div key={index} className='right__block--item'>
@@ -69,8 +75,7 @@ const Footer = () => {
 					</div>
 
 					<div className='right__block--item phone'>
-						{/* Закомментировал вызов openModal */}
-						<button onClick={openModal} className='phone-btn'>
+						<button onClick={() => {}} className='phone-btn'>
 							+38 (068) 949 - 49 - 19
 						</button>
 					</div>

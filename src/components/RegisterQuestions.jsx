@@ -1,26 +1,17 @@
 import React, { useState } from 'react'
 import { useModalPlaceOrder } from '../hooks/useModalPlaceOrder'
+import { useLanguage } from '../contexts/LanguageContext'
 
 const RegisterQuestions = () => {
 	const { openOrderModal } = useModalPlaceOrder()
+	const { translations } = useLanguage()
+
 	const [formData, setFormData] = useState({
 		fullname: '',
 		phoneNumber: '',
 		testDay: false,
 		agreement: false,
 	})
-
-	const questions = [
-		'Як здійснюється доставка правильного харчування?',
-		'Чи можна змінювати час доставки\\місце?',
-		'Як і в чому привозять їжу?',
-		'Коли Ви готуєте?',
-		'Какие продукты Вы используете?',
-		'Я буду їсти одне й те саме?',
-		'У мене алергія і непереносимість певних продуктів',
-		'У якій черговості все є?',
-		'Чи можна заморожувати програму?',
-	]
 
 	const handleInputChange = e => {
 		const { name, value, type, checked } = e.target
@@ -30,20 +21,34 @@ const RegisterQuestions = () => {
 		}))
 	}
 
+	const questions = [
+		translations['questions.item1'],
+		translations['questions.item2'],
+		translations['questions.item3'],
+		translations['questions.item4'],
+		translations['questions.item5'],
+		translations['questions.item6'],
+		translations['questions.item7'],
+		translations['questions.item8'],
+		translations['questions.item9'],
+	]
+
 	return (
 		<div className='register__questions'>
 			<div className='container'>
 				<div className='reg__order'>
 					<div className='content'>
-						<div className='content__title'>Оформити замовлення</div>
+						<div className='content__title'>
+							{translations['place__order.title']}
+						</div>
+
 						<div className='content__text'>
-							Обговоріть всі деталі замовлення по телефону
-							<br />
-							або самі вкажіть всі подробиці онлайн
+							{translations['place__order.desc']}
 						</div>
 					</div>
 
 					<form className='modern__form'>
+						{/* FULLNAME */}
 						<div className='input__field'>
 							<input
 								type='text'
@@ -53,9 +58,10 @@ const RegisterQuestions = () => {
 								onChange={handleInputChange}
 								required
 							/>
-							<label htmlFor='fullname'>Имя</label>
+							<label htmlFor='fullname'>{translations['input.name']}</label>
 						</div>
 
+						{/* PHONE */}
 						<div className='input__field'>
 							<input
 								type='tel'
@@ -65,9 +71,12 @@ const RegisterQuestions = () => {
 								onChange={handleInputChange}
 								required
 							/>
-							<label htmlFor='phoneNumber'>Номер телефона</label>
+							<label htmlFor='phoneNumber'>
+								{translations['input.phoneNumber']}
+							</label>
 						</div>
 
+						{/* TEST DAY */}
 						<div className='radio__item'>
 							<input
 								type='checkbox'
@@ -78,10 +87,11 @@ const RegisterQuestions = () => {
 							/>
 							<label htmlFor='radioOption1' className='radio__label'>
 								<div className='custom__radio'></div>
-								<span>Тест-день! Получить скидку -30%?</span>
+								<span>{translations['radioBtn.testDay']}</span>
 							</label>
 						</div>
 
+						{/* AGREEMENT */}
 						<div className='radio__item'>
 							<input
 								type='checkbox'
@@ -92,26 +102,31 @@ const RegisterQuestions = () => {
 							/>
 							<label htmlFor='radioOption2' className='radio__label'>
 								<div className='custom__radio'></div>
-								<span>
-									Согласен с
-									<span className='green'> умовами сотрудничества</span>
-								</span>
+								<span>{translations['radioBtn.agreeWithTerms']}</span>
 							</label>
 						</div>
 					</form>
 
 					<div className='place__order'>
-						<button className='submit__btn'>Замовити по телефону</button>
-						<div className='order1__text'>или</div>
+						<button className='submit__btn'>
+							{translations['questions.placeOrderBtn']}
+						</button>
+
+						<div className='order1__text'>{translations['questions.or']}</div>
+
 						<button onClick={openOrderModal} className='submit__btn'>
-							Онлайн замовлення
+							{translations['questions.placeOrderBtn2']}
 						</button>
 					</div>
 				</div>
 
+				{/* QUESTIONS SECTION */}
 				<div className='questions'>
 					<div className='content'>
-						<div className='content__title'>Часто задавані питання</div>
+						<div className='content__title'>
+							{translations['questions.title']}
+						</div>
+
 						{questions.map((question, index) => (
 							<div key={index} className='content__item'>
 								{question}

@@ -1,13 +1,10 @@
 body.nutrition-page .header {
-	margin-top: -70px;
 	position: relative;
-	z-index: 1000;
 }
 
 body.nutrition-page .app,
 body.nutrition-page .nutrition {
 	position: relative;
-	z-index: 1;
 	margin-top: 0;
 	padding-top: 0;
 }
@@ -16,15 +13,10 @@ body.nutrition-page .nutrition {
 
 .footer {
 	width: 100vw;
-	margin: 0;
+	margin: 0 auto;
 	padding: 40px 0;
 	background-color: #f5faff;
 	box-shadow: 0 0 40px 0 rgba(86, 86, 86, 0.3);
-	position: relative;
-	left: 50%;
-	transform: translateX(
-		-50%
-	);
 }
 
 .footer .container {

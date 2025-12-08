@@ -81,9 +81,7 @@ function App() {
 			<ModalProvider>
 				<LanguageProvider>
 					<div className='app'>
-						<div className='container'>
-							<RouterProvider router={router} />
-						</div>
+						<RouterProvider router={router} />
 					</div>
 				</LanguageProvider>
 			</ModalProvider>

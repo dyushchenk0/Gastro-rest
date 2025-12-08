@@ -12,7 +12,13 @@ body.nutrition-page .nutrition {
 	padding-top: 0;
 }
 
+#root {
+	width: 100%;
+	max-width: 1300px;
+}
+
 .app {
+	margin: 0 auto;
 	position: relative;
 	min-height: 100vh;
 	display: flex;
@@ -123,6 +129,11 @@ body.nutrition-page .nutrition {
 	width: 100%;
 }
 
+.meal__name {
+  white-space: pre-line;
+	margin-right: 10px;
+}
+
 // Lunch Card
 
 .lunch__block {
@@ -230,6 +241,8 @@ body.nutrition-page .nutrition {
 			margin-bottom: 20px;
 			margin-left: 50px;
 		}
+		
+		
 
 		.lunch__count {
 			position: relative;

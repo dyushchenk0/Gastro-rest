@@ -1,6 +1,9 @@
 import React from 'react'
+import { useLanguage } from '../contexts/LanguageContext.jsx'
 
 const Rules = () => {
+	const { translations } = useLanguage()
+
 	return (
 		<div className='rules'>
 			<div className='container'>
@@ -10,54 +13,31 @@ const Rules = () => {
 							<div className='rules__icon'>
 								<img src='src/assets/icons/work/eco.png' alt='Eco' />
 							</div>
-							<div className='rules__text'>
-								Бережемо природу.
-								<br />
-								Еко-тара та прилади.
-							</div>
+							<div className='rules__text'>{translations['rules.rule1']}</div>
 						</div>
 						<div className='rules__item'>
 							<div className='rules__icon'>
 								<img src='src/assets/icons/work/food.png' alt='Food' />
 							</div>
-							<div className='rules__text'>
-								28 днів без повторень,
-								<br />
-								понад 300 страв!
-							</div>
+							<div className='rules__text'>{translations['rules.rule2']}</div>
 						</div>
 						<div className='rules__item'>
 							<div className='rules__icon'>
 								<img src='src/assets/icons/work/time.png' alt='Time' />
 							</div>
-							<div className='rules__text'>
-								Безкоштовно замінюємо
-								<br />
-								страви та інгредієнти.
-							</div>
+							<div className='rules__text'>{translations['rules.rule3']}</div>
 						</div>
 						<div className='rules__item'>
 							<div className='rules__icon'>
 								<img src='src/assets/icons/work/night.png' alt='Night' />
 							</div>
-							<div className='rules__text'>
-								Готуємо вночі, пакуємо
-								<br />і відправляємо Вам!
-							</div>
+							<div className='rules__text'>{translations['rules.rule4']}</div>
 						</div>
 						<div className='rules__item'>
 							<div className='rules__icon'>
-								<img
-									src='src/assets/icons/work/delivery.png'
-									alt='Delivery'
-								/>
+								<img src='src/assets/icons/work/delivery.png' alt='Delivery' />
 							</div>
-							<div className='rules__text'>
-								Щоденна зручна
-								<br />
-								та безкоштовна доставка
-								<br />з 6:00 до 10:00
-							</div>
+							<div className='rules__text'>{translations['rules.rule5']}</div>
 						</div>
 						<div className='rules__item'>
 							<div className='rules__icon'>
@@ -67,12 +47,7 @@ const Rules = () => {
 									alt='Clock'
 								/>
 							</div>
-							<div className='rules__text'>
-								Сохраняем Вашу энергию
-								<br />и до 14 часов в неделю
-								<br />
-								освобождая от готовки!
-							</div>
+							<div className='rules__text'>{translations['rules.rule6']}</div>
 						</div>
 					</div>
 				</div>
