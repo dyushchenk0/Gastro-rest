@@ -80,3 +80,5 @@ GitHub: dyushchenk0
 Email: dyushchenko0@gmail.com
 Telegram: @daniilyurich
 
+<img width="1904" height="1079" alt="image" src="https://github.com/user-attachments/assets/cfb42406-d2af-4bcf-846a-1a0d00cb4cb2" />
+
