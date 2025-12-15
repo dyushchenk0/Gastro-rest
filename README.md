@@ -49,30 +49,29 @@ npm start
 ```
 
 **Project Structure:**
-gastro-chef/
-├─ api/                  # Backend (Node.js)
-│  ├─ controllers/       # API controllers
-│  ├─ routes/            # Routes
-│  ├─ db.js              # Database connection
-│  ├─ index.js           # Entry point
-│  ├─ package.json
-│  └─ package-lock.json
-├─ src/                  # Frontend (React)
-│  ├─ assets/            # Images and icons
-│  ├─ components/        # JSX components
-│  ├─ context/           # React context
-│  ├─ pages/             # Pages
-│  ├─ scss/              # SCSS styles
-│  ├─ App.jsx
-│  ├─ App.css
-│  ├─ index.css
-│  ├─ main.jsx
-│  ├─ index.html
-│  ├─ package.json
-│  ├─ package-lock.json
-│  └─ vite.config.js
-├─ .gitignore
-└─ eslint.config.js
+api
+  controllers(folder)
+  routes(folder)
+  db.js
+  index.js
+  package-lock.json
+  package.json
+src
+  assets(folder with images/icons)
+  components(folder with jsx)
+  context(folder)
+  pages(folder)
+  scss(folder with styles for components)
+  App.css
+  App.jsx
+  index.css
+  main.jsx
+  .gitignore
+  eslint.config.js
+  index.html
+  package-lock.json
+  package.json
+  vite.config.js
 
 
 **Contacts**
@@ -80,3 +79,4 @@ If you have any questions or suggestions, you can reach me via:
 GitHub: dyushchenk0
 Email: dyushchenko0@gmail.com
 Telegram: @daniilyurich
+
